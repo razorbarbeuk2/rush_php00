@@ -2,7 +2,9 @@
 session_start();
 include('function.php');
 $conn = connexion();
-if ($_SESSION['LOGGUED'] == NULL){
+$path = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'], 1);
+$p = $path."/signin.php";
+if ($_SESSION['LOGGUED'] != NULL){
 	echo "ALREADY LOGGUED IN\n";
 	return ;
 }
@@ -33,6 +35,8 @@ if ($_POST['login'] != NULL && $_POST['passwd'] != NULL){
 	Mot de passe: <input type="password" name="passwd" value=""/>
 	<br />
 	<input type="submit" value="OK" name="submit"/>
+	<br />
+	<a href="<?php echo $p; ?>">DEJA UN COMPTE ?</a>
 </form></center>
 </body>
 </html>

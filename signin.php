@@ -2,7 +2,7 @@
 session_start();
 include('function.php');
 $conn = connexion();
-if ($_SESSION['LOGGUED'] == NULL){
+if ($_SESSION['LOGGUED'] != NULL){
 	echo "ALREADY LOGGUED IN\n";
 	return ;
 }
@@ -15,9 +15,6 @@ if ($_POST['login'] != NULL && $_POST['passwd'] != NULL){
 	else{
 		echo "LOGIN DONT EXISTS\n";
 	}
-}
-else{
-	echo "ALREADY LOGGUED IN\n";
 }
 
 ?>

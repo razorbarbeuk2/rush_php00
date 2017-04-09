@@ -108,5 +108,6 @@ session_start();
 			}
 			$a++;
 		}
+		return $tab['ID_SESSION'];
 	}
 ?>
