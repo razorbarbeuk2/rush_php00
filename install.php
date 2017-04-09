@@ -33,10 +33,21 @@ if (mysqli_query($conn, $sql)) {
     echo "Error creating database: " . mysqli_error($conn);
 }
 $array_names = array("amarzial", "aoudin", "bsouchet", "ccorcy", "chikram", "mbooth", "cumberto", "czalewsk", "ddufour", "mbuch", "tfontain", "tsanzey", "tfleming", "ebonafi", "fqueyrel", "hcherchi", "oseng", "pba", "pmartine", "auhuynh", "cattouma", "dimayout", "ealbert", "framel", "hboudra", "jcarra", "jhezard", "lboudaa", "mdos-san", "mseinic", "qduperon", "qhonore", "qloubier", "rabougue", "rorousse", "snicolet", "spajeo", "tbollach", "vdaviot", "vijacque", "vsteffen", "yismail", "ysan-seb");
-
+// $array_class = array("Commis", "Le Bleu", "Average Men", "Captain", "General");
 for ($i=0; $i <= 42; $i++)
 {
+	// $class = NULL;
 	$nb = rand(5, 50);
+	// if ($nb > 5 && $nb < 13)
+	// 	$class = $array_class[0];
+	// if ($nb > 12 && $nb < 21)
+	// 	$class = $array_class[1];
+	// if ($nb > 20 && $nb < 29)
+	// 	$class = $array_class[2];
+	// if ($nb > 28 && $nb < 37)
+	// 	$class = $array_class[3];
+	// if ($nb > 36 && $nb < 51)
+	// 	$class = $array_class[4];
 	$line = "INSERT INTO objet (name, value, url) VALUES ('$array_names[$i]', $nb, 'https://cdn.intra.42.fr/users/$array_names[$i].jpg');";
 	if (mysqli_query($conn, $line) === false)
 		die("Connection error: " . mysqli_error($conn));

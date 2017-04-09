@@ -110,4 +110,66 @@ session_start();
 		}
 		return $tab['ID_SESSION'];
 	}
-?>
+// Fonction verification de droit
+	function verif_admin($login){
+		$conn = connexion();
+		$req_id = mysqli_query($conn, "SELECT droit FROM membre WHERE login = '$login';");
+		$arr = mysqli_fetch_array($req_id);
+		if ($arr['droit'] == 1){
+			return 1;
+		}
+		return 0;
+	}
+// Fonction de redirection vers Index.php
+	function redir_index(){
+		$path = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'], 1);
+		$loc = "Location: ".$path."/index.php";
+		header($loc);
+	}
+// Fonction de redirection vers SUFFIX -> (/log.php)
+	function redir_suffix($suffix){
+		$path = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'], 1);
+		$loc = "Location: ".$path.$suffix;
+		header($loc);
+	}
+// Fonction suppression de compte
+	function del_account($login){
+		$conn = connexion();
+		$req = "DELETE FROM membre WHERE login = '$login';";
+		if (mysqli_query($conn, $req) === false){
+			die("Connection error: " . mysqli_error($conn));
+		}
+		redir_suffix("/loggout.php");
+	}
+// Fonction ajout objet
+	function add_objet($name, $class, $value, $url){
+		$conn = connexion();
+		$req_insert = "INSERT INTO objet (name, class, value, url) VALUES ($name, $class, $value, $url);";
+		if (mysqli_query($conn, $req_insert) === false){
+			die("Connection error: " . mysqli_error($conn));
+		}
+	}
+// Fonction suppression d'objet
+	function del_objet($name){
+		$conn = connexion();
+		$req = "DELETE FROM objet WHERE name = '$name';";
+		if (mysqli_query($conn, $req) === false){
+			die("Connection error: " . mysqli_error($conn));
+		}
+	}
+// Fonction donner droit admin
+	function user_to_admin($login){
+		$conn = connexion();
+		$req_d = "UPDATE membre SET droit=1 WHERE login = '$login';";
+		if (mysqli_query($conn, $req_d) === false){
+			die("Connection error: " . mysqli_error($conn));
+		}
+	}
+// Fonction donner droit user
+	function admin_to_user($login){
+		$conn = connexion();
+		$req_d = "UPDATE membre SET droit=0 WHERE login = '$login';";
+		if (mysqli_query($conn, $req_d) === false){
+			die("Connection error: " . mysqli_error($conn));
+		}
+	}

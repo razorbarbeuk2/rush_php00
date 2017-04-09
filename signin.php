@@ -3,14 +3,14 @@ session_start();
 include('function.php');
 $conn = connexion();
 if ($_SESSION['LOGGUED'] != NULL){
-	echo "ALREADY LOGGUED IN\n";
-	return ;
+	redir_index();
 }
 if ($_POST['login'] != NULL && $_POST['passwd'] != NULL){
 	$passwd = crypte($_POST['passwd']);
 	$login = $_POST['login'];
 	if (check_signin($_POST['login'], $passwd, $conn) === 1){
 		$_SESSION['LOGGUED'] = $login;
+		redir_index();
 	}
 	else{
 		echo "LOGIN DONT EXISTS\n";

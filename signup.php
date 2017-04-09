@@ -5,8 +5,7 @@ $conn = connexion();
 $path = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'], 1);
 $p = $path."/signin.php";
 if ($_SESSION['LOGGUED'] != NULL){
-	echo "ALREADY LOGGUED IN\n";
-	return ;
+	redir_index();
 }
 if ($_POST['login'] != NULL && $_POST['passwd'] != NULL){
 	$passwd = crypte($_POST['passwd']);
@@ -15,6 +14,7 @@ if ($_POST['login'] != NULL && $_POST['passwd'] != NULL){
 		$req = "INSERT INTO membre (login, passwd) VALUES ('$login', '$passwd');";
 		if (mysqli_query($conn, $req)){
 			$_SESSION['LOGGUED'] = $login;
+			redir_index();
 		}
 		else{
 				echo "QUERRY FAIL\n";
