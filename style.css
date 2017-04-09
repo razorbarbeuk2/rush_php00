@@ -1,0 +1,57 @@
+body{
+	width: 75%;
+    padding-left: 12%;
+}
+
+.header{
+
+}
+#cart{
+	width: 10%;
+}
+
+#input{
+	width: 50%;
+}
+
+#title{
+	width: 30%;
+    left: 39%;
+    position: relative;
+}
+
+.info{
+	position: relative;
+    width: 749px;
+    height: 164px;
+    bottom: -19px;
+    left: 70px;
+	border-style: solid;
+	border-width: 5px;
+
+}
+
+#validation{
+	bottom: 23px;
+	position: relative;
+	left: 20%;
+}
+.img{
+	display: inline-flex;
+	position: relative;
+	width: 10%;
+	top: 50px;
+	padding: 1px 6px;
+	min-width: 50px;
+	min-height: 50px;
+}
+
+
+img{
+	width: 100%;
+}
+
+form{
+	position: relative;
+	width: 100%;
+}

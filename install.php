@@ -1,18 +1,15 @@
 <?php
 session_start();
-include('function.php');
 
-// Create connection
 $conn = mysqli_connect(localhost, "root", "root");
-// Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 $sql = "CREATE DATABASE Rush;";
 $sql0 = "USE Rush";
-$sql1 = "CREATE TABLE membre (id_membre int(11) NOT NULL,login text NOT NULL,passwd text NOT NULL,droit int(11) NOT NULL);";
-$sql2 = "CREATE TABLE objet (id_objet int(11) NOT NULL,class text NOT NULL,value int(11) NOT NULL DEFAULT 0,url text NOT NULL);";
-$sql3 = "CREATE TABLE panier (id_panier int(11) NOT NULL,id_membre int(11) NOT NULL,id_objet int(11) NOT NULL);";
+$sql1 = "CREATE TABLE membre (id_membre int(11) NOT NULL,login text NOT NULL,passwd text NOT NULL,droit int(11) NOT NULL DEFAULT 0);";
+$sql2 = "CREATE TABLE objet (id_objet int(11) NOT NULL,name text NOT NULL,class text NULL,value int(11) NOT NULL DEFAULT 0,url text NOT NULL);";
+$sql3 = "CREATE TABLE panier (id_panier int(11) NOT NULL,id_membre int(11) NOT NULL,id_objet int(11) NOT NULL,quantite int(11) NOT NULL DEFAULT '0',total int(11) NOT NULL);";
 $sql4 = "ALTER TABLE membre ADD PRIMARY KEY (id_membre);";
 $sql5 = "ALTER TABLE objet ADD PRIMARY KEY (id_objet);";
 $sql6 = "ALTER TABLE panier ADD PRIMARY KEY (id_panier), ADD KEY id_membre (id_membre), ADD KEY id_objet (id_objet);";
@@ -34,6 +31,15 @@ if (mysqli_query($conn, $sql)) {
     echo "Database created successfully";
 } else {
     echo "Error creating database: " . mysqli_error($conn);
+}
+$array_names = array("amarzial", "aoudin", "bsouchet", "ccorcy", "chikram", "mbooth", "cumberto", "czalewsk", "ddufour", "mbuch", "tfontain", "tsanzey", "tfleming", "ebonafi", "fqueyrel", "hcherchi", "oseng", "pba", "pmartine", "auhuynh", "cattouma", "dimayout", "ealbert", "framel", "hboudra", "jcarra", "jhezard", "lboudaa", "mdos-san", "mseinic", "qduperon", "qhonore", "qloubier", "rabougue", "rorousse", "snicolet", "spajeo", "tbollach", "vdaviot", "vijacque", "vsteffen", "yismail", "ysan-seb");
+
+for ($i=0; $i <= 42; $i++)
+{
+	$nb = rand(5, 50);
+	$line = "INSERT INTO objet (name, value, url) VALUES ('$array_names[$i]', $nb, 'https://cdn.intra.42.fr/users/$array_names[$i].jpg');";
+	if (mysqli_query($conn, $line) === false)
+		die("Connection error: " . mysqli_error($conn));
 }
 
 ?>
