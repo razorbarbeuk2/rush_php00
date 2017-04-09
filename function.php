@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 // Fonction de cryptage
 	function crypte($var) {
 		$crypt = hash("Whirlpool", $var);
@@ -31,6 +31,11 @@ session_start();
 		}
 		return 0;
 	}
+// Function check de cookie et infos
+	// function get_value_article(){
+	// 	if ($_POST['name'] != NULL && $_POST['quantite'] != NULL && $_POST['submit'] == OK)
+	// 		handle_cookie($_POST['name'], $_POST['quantite']);
+	// }
 // Function modification de cookie
 	function modif_cookie($name, $quantite, $tab){
 		$a = 0;
@@ -110,6 +115,7 @@ session_start();
 		}
 		return $tab['ID_SESSION'];
 	}
+
 // Fonction verification de droit
 	function verif_admin($login){
 		$conn = connexion();
@@ -120,6 +126,22 @@ session_start();
 		}
 		return 0;
 	}
+
+// Fonction de redirection vers Index.php
+	// function valid_cart(){
+	// 	if ($_SESSION['LOGGUED'] != NULL){
+	// 		if ($_POST['submit'] == "Valider la commande"){
+	// 			$id_session = cart_bdd($_SESSION['LOGGUED']);
+	// 			if (file_exists("/cart/".$id_session))
+	// 				unlink("/cart/".$id_session);
+	// 		}
+	// 		else
+	// 			echo "ERROR SUBMIT\n";
+	// 	}
+	// 	else
+	// 		redir_suffix("/signup.php");
+	// }
+
 // Fonction de redirection vers Index.php
 	function redir_index(){
 		$path = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'], 1);
@@ -173,3 +195,5 @@ session_start();
 			die("Connection error: " . mysqli_error($conn));
 		}
 	}
+
+
