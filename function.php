@@ -98,17 +98,15 @@ session_start();
 		$tab['ID_SESSION'] = session_id();
 		$cook = unserialize(file_get_contents("cart/".$tab['ID_SESSION']));
 		$a = 0;
-		// while (!empty($cook[$a])){
-			echo $id_membre."\n";
-			echo $cook[$a]['id_objet']."\n";
-			echo $cook[$a]['quantite']."\n";
-			echo $cook[$a]['total']."\n";
-			$req_insert = "INSERT INTO panier (id_membre, id_objet, quantite, total) VALUES ('$id_membre', '$cook[$a]['id_objet']', '$cook[$a]['quantite']', '$cook[$a]['total']');";
+		while (!empty($cook[$a])){
+			$id_obj = $cook[$a]['id_objet'];
+			$quantite = $cook[$a]['quantite'];
+			$total = $cook[$a]['total'];
+			$req_insert = "INSERT INTO panier (id_membre, id_objet, quantite, total) VALUES ($id_membre, $id_obj, $quantite, $total);";
 			if (mysqli_query($conn, $req_insert) === false){
 				die("Connection error: " . mysqli_error($conn));
 			}
-		// 	$a++;
-		// }
+			$a++;
+		}
 	}
-	cart_bdd("toto");
 ?>
